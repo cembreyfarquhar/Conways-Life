@@ -5,8 +5,12 @@ import Cell from './Cell'
 const Grid = () => {
     // initialize grid
     const grid = []
-    for (let i = 0; i < 400; i++) {
-        grid.push({ currentState: 'dead' })
+    for (let i = 0; i < 20; i++) {
+        if (i % 2 === 0) {
+            grid.push({ currentState: 'dead' })
+        } else {
+            grid.push({ currentState: 'alive' })
+        }
     }
     // * Properties
     // - [ ] currentState: (alive, dead),
