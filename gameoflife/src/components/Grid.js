@@ -2,16 +2,9 @@ import React from 'react'
 
 import Cell from './Cell'
 
-const Grid = () => {
+const Grid = ({ grid }) => {
     // initialize grid
-    const grid = []
-    for (let i = 0; i < 20; i++) {
-        if (i % 2 === 0) {
-            grid.push({ currentState: 'dead' })
-        } else {
-            grid.push({ currentState: 'alive' })
-        }
-    }
+
     // * Properties
     // - [ ] currentState: (alive, dead),
     //   (black, white)

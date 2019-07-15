@@ -10,7 +10,9 @@ const Cell = ({ cell }) => {
                     height: '20px',
                     border: '1px solid grey',
                 }}
-            />
+            >
+                {cell.id}
+            </div>
         )
     } else if (cell.currentState === 'alive') {
         return (
@@ -21,8 +23,11 @@ const Cell = ({ cell }) => {
                     height: '20px',
                     backgroundColor: 'black',
                     border: '1px solid grey',
+                    fontSize: '8px',
                 }}
-            />
+            >
+                {cell.id}
+            </div>
         )
     }
 }
