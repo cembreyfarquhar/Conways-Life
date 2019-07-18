@@ -8,23 +8,29 @@ function App() {
 
     const [playing, setPlaying] = useState(true)
 
-    const [timer, setTimer] = useState(0)
-
     const gridSize = []
 
     for (let i = 0; i < 400; i++) {
-        gridSize.push('')
+        gridSize.push({ id: i })
     }
 
     useEffect(() => {
         if (playing) {
-            let x = 0
+            let timer = 0
+
             setInterval(() => {
-                setTimer(timer + 1)
-                console.log('running')
+                timer++
+                console.log(timer)
                 setGrid(
-                    gridSize.map(() => {
+                    gridSize.map(cell => {
+                        if (cell.id % 2 == 0) {
+                            return {
+                                ...cell,
+                                currentState: 'dead',
+                            }
+                        }
                         return {
+                            ...cell,
                             currentState: 'alive',
                         }
                     }),
