@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Cell = ({ id, currentState }) => {
-    if (currentState === 'dead') {
+const Cell = ({ x, y, isAlive }) => {
+    if (isAlive) {
         return (
             <div
                 style={{
@@ -11,10 +11,10 @@ const Cell = ({ id, currentState }) => {
                     border: '1px solid grey',
                 }}
             >
-                {id}
+                {/* {id} */}
             </div>
         )
-    } else if (currentState === 'alive') {
+    } else {
         return (
             <div
                 style={{
@@ -26,7 +26,7 @@ const Cell = ({ id, currentState }) => {
                     fontSize: '8px',
                 }}
             >
-                {id}
+                {/* {id} */}
             </div>
         )
     }

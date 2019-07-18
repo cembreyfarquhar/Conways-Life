@@ -2,8 +2,9 @@ import React from 'react'
 
 import Cell from './Cell'
 
-const Grid = grid => {
+const Grid = ({ grid }) => {
     // initialize grid
+    console.table(grid)
 
     // * Properties
     // - [ ] currentState: (alive, dead),
@@ -28,9 +29,7 @@ const Grid = grid => {
                 }}
             >
                 {grid.map(cell => {
-                    return (
-                        <Cell id={cell.id} currentState={cell.currentState} />
-                    )
+                    return <Cell x={cell.x} y={cell.y} isAlive={cell.isAlive} />
                 })}
             </div>
         )
