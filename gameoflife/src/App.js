@@ -6,7 +6,7 @@ import Grid from './components/Grid'
 function App() {
     let [grid, setGrid] = useState([])
 
-    const [playing, setPlaying] = useState(true)
+    const [playing, setPlaying] = useState(false)
 
     const gridSize = []
 
@@ -15,27 +15,94 @@ function App() {
     }
 
     useEffect(() => {
-        if (playing) {
-            let timer = 0
+        setGrid(
+            gridSize.map(cell => {
+                return {
+                    ...cell,
+                    currentState: 'alive',
+                }
+            }),
+        )
+    }, [])
 
-            setInterval(() => {
-                timer++
-                console.log(timer)
+    const getAliveNeighbors = ({ id }) => {
+        let count = 0
+        console.log('heerss')
+        console.log(grid[id])
+
+        // right
+        if (id % 20 !== 20) {
+            if (grid[id].currentState === 'alive') count++
+        }
+
+        // bottom right
+        if (id % 20 !== 20 && id - 380 < 1) {
+            if (grid[id + 20].currentState === 'alive') count++
+        }
+
+        // bottom
+        if (id % 20 !== 20 && id - 380 < 1) {
+            if (grid[id].currentState === 'alive') count++
+        }
+
+        // bottom left
+        if (id % 20 !== 20 && id - 380 < 1) {
+            if (grid[id].currentState === 'alive') count++
+        }
+
+        // left
+        if (id % 20 !== 20) {
+            if (grid[id].currentState === 'alive') count++
+        }
+
+        // top left
+        if (id % 20 !== 20) {
+            if (grid[id].currentState === 'alive') count++
+        }
+
+        // top
+        if (id % 20 !== 20) {
+            if (grid[id].currentState === 'alive') count++
+        }
+
+        // top right
+        if (id % 20 !== 20) {
+            if (grid[id].currentState === 'alive') count++
+        }
+
+        return count
+    }
+
+    useEffect(() => {
+        if (playing) {
+            if (grid.length > 0) {
                 setGrid(
-                    gridSize.map(cell => {
-                        if (cell.id % 2 == 0) {
-                            return {
-                                ...cell,
-                                currentState: 'dead',
-                            }
+                    gridSize.map(cellID => {
+                        console.log(grid)
+                        // const living = grid[cellID].currentState
+                        // const neighbors = getAliveNeighbors(cellID)
+                        const living = false
+                        const neighbors = 1
+                        let resultingState = false
+                        if (living && neighbors < 2) {
+                            resultingState = false
+                        }
+                        if (living && (neighbors === 2 || neighbors === 3)) {
+                            resultingState = true
+                        }
+                        if (living && neighbors > 3) {
+                            resultingState = false
+                        }
+                        if (!living && neighbors == 3) {
+                            resultingState = true
                         }
                         return {
-                            ...cell,
-                            currentState: 'alive',
+                            id: cellID,
+                            currentState: resultingState ? 'alive' : 'dead',
                         }
                     }),
                 )
-            }, 1000)
+            }
         }
     }, [playing])
     return (
@@ -51,6 +118,14 @@ function App() {
         >
             <header>
                 <h1>Conway's Game of Life</h1>
+                <button
+                    onClick={e => {
+                        e.preventDefault()
+                        setPlaying(true)
+                    }}
+                >
+                    Play
+                </button>
             </header>
             <Grid grid={grid} />
         </div>
