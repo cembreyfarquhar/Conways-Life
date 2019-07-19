@@ -4,7 +4,6 @@ import Cell from './Cell'
 
 const Grid = ({ grid }) => {
     // initialize grid
-    console.table(grid)
 
     // * Properties
     // - [ ] currentState: (alive, dead),

@@ -1,35 +1,46 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Grid from './Grid'
 
-const Game = ({ playing }) => {
-    const grid = []
-
-    useEffect(() => {
-        const interval = 1000
-        const msg = 'hello'
-        const loop = playing
-        if (loop) {
-            loop = setInterval(() => {
-                console.log(msg)
-            }, interval)
-        } else {
-            clearInterval(loop)
-        }
-    }, [playing])
-
-    for (let i = 1; i <= 400; i++) {
-        const x = Math.ceil(i / 20)
-        const y = Math.ceil(i / 20)
-        const isAlive = i % 2 === 0 ? false : true
-        const cell = {
-            x,
-            y,
-            isAlive,
-        }
-        grid.push(cell)
+class Game extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { grid: [] }
+        this.x = 20
+        this.y = 20
     }
 
-    return <Grid grid={grid} />
+    loop() {
+        this.setState({})
+        if (this.props.playing === false) {
+            clearInterval(this.intervalId)
+        }
+    }
+
+    makeGrid() {
+        const grid = []
+
+        for (let i = 0; i < this.x; i++) {
+            const row = []
+            for (let j = 0; j < this.y; j++) {
+                row.push(0)
+            }
+            grid.push(row)
+        }
+        console.log(grid[2][3])
+    }
+
+    componentDidMount() {
+        this.intervalId = setInterval(this.loop.bind(this), 1000)
+        this.makeGrid()
+    }
+
+    render() {
+        return (
+            <div>
+                <Grid grid={this.state.grid} />
+            </div>
+        )
+    }
 }
 
 export default Game
