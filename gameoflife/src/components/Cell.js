@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 const Cell = ({ x, y, isAlive }) => {
-    console.log(x)
     if (isAlive) {
         return (
             <div

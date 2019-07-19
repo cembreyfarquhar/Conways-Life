@@ -47,23 +47,32 @@ class Game extends React.Component {
 
     checkIfShouldLive(grid, posArr) {
         const [x, y] = posArr
+
+        const cell = grid[x][y]
+
+        const neighbors = this.getAliveNeighbors(cell)
+
+        console.log(cell)
         // Alive, < 2 neighbors === DEAD by underpopulation
 
-        if (condition) {
+        if (cell.isAlive && neighbors < 2) {
             return false
         }
 
         // Alive, 2 or 3 neighbors, LIVES ON
-        if (condition) {
-            return false
+        if (cell.isAlive && (neighbors === 2 || neighbors === 3)) {
+            return true
         }
 
         // Alive, >3 neighbors === DEAD by overpopulation
-        if (condition) {
+        if (cell.isAlive && neighbors > 3) {
             return false
         }
 
         // Dead, 3 neighbors === ALIVE by reproduction
+        if (!cell.isAlive && neighbors === 3) {
+            return true
+        }
     }
 
     makeFirstGrid() {
@@ -72,7 +81,10 @@ class Game extends React.Component {
         for (let i = 0; i < this.x; i++) {
             const row = []
             for (let j = 0; j < this.y; j++) {
-                const isAlive = false
+                let isAlive = false
+                if ((i === 10) & (j === 10)) {
+                    isAlive = true
+                }
                 row.push({ i, j, isAlive })
             }
             grid.push(row)
