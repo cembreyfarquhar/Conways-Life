@@ -36,8 +36,8 @@ class Game extends React.Component {
         for (let i = 0; i < this.x; i++) {
             const row = []
             for (let j = 0; j < this.y; j++) {
-                const isAlive = this.checkIfShouldLive()
-                row.push({ x: i, y: j, isAlive: true })
+                const isAlive = this.checkIfShouldLive(oldGrid, [i, j])
+                row.push({ x: i, y: j, isAlive })
             }
             grid.push(row)
         }
@@ -45,8 +45,25 @@ class Game extends React.Component {
         return grid
     }
 
-    checkIfShouldLive(cell) {
-        return true
+    checkIfShouldLive(grid, posArr) {
+        const [x, y] = posArr
+        // Alive, < 2 neighbors === DEAD by underpopulation
+
+        if (condition) {
+            return false
+        }
+
+        // Alive, 2 or 3 neighbors, LIVES ON
+        if (condition) {
+            return false
+        }
+
+        // Alive, >3 neighbors === DEAD by overpopulation
+        if (condition) {
+            return false
+        }
+
+        // Dead, 3 neighbors === ALIVE by reproduction
     }
 
     makeFirstGrid() {
