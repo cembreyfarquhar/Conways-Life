@@ -19,28 +19,31 @@ class Game extends React.Component {
     getAliveNeighbors(i, j) {
         let count = 0
 
+        let x = i
+        i = j
+
         const grid = this.state.grid
         //top
-        if (j > 0 && grid[i][j - 1].isAlive) count += 1
+        if (x > 0 && grid[i][x - 1].isAlive) count += 1
         //top right
-        if (j > 0 && i < 19 && grid[i + 1][j - 1].isAlive) count += 1
+        if (x > 0 && i < 19 && grid[i + 1][x - 1].isAlive) count += 1
         //right
-        if (i < 19 && grid[i + 1][j].isAlive) count += 1
+        if (i < 19 && grid[i + 1][x].isAlive) count += 1
 
         //bottom right
-        if (i < 19 && j < 19 && grid[i + 1][j + 1].isAlive) count += 1
+        if (i < 19 && x < 19 && grid[i + 1][x + 1].isAlive) count += 1
 
         //bottom
-        if (j < 19 && grid[i][j + 1].isAlive) count += 1
+        if (x < 19 && grid[i][x + 1].isAlive) count += 1
 
         //bottom left
-        if (i > 0 && j < 19 && j > 0 && grid[i - 1][j + 1].isAlive) count += 1
+        if (i > 0 && x < 19 && x > 0 && grid[i - 1][x + 1].isAlive) count += 1
 
         //left
-        if (i > 0 && grid[i - 1][j].isAlive) count += 1
+        if (i > 0 && grid[i - 1][x].isAlive) count += 1
 
         //top left
-        if (i > 0 && j > 0 && grid[i][j].isAlive) count += 1
+        if (i > 0 && x > 0 && grid[i][x].isAlive) count += 1
 
         return count
     }
@@ -107,7 +110,7 @@ class Game extends React.Component {
                 if ((i === 11) & (j === 11)) {
                     isAlive = true
                 }
-                if ((i === 11) & (j === 12)) {
+                if ((i === 12) & (j === 9)) {
                     isAlive = true
                 }
                 if ((i === 12) & (j === 10)) {
@@ -126,7 +129,7 @@ class Game extends React.Component {
 
     componentDidMount() {
         this.setState({ grid: this.makeFirstGrid() })
-        this.intervalId = setInterval(this.loop.bind(this), 1000)
+        this.intervalId = setInterval(this.loop.bind(this), 200)
     }
 
     render() {
