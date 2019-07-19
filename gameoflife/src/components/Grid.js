@@ -27,7 +27,7 @@ const Grid = ({ grid }) => {
                     flexWrap: 'wrap',
                 }}
             >
-                {console.log(grid[0][2].x)}
+                {/* {console.log(grid[0][2].x)} */}
 
                 {grid.map(nested =>
                     nested.map(cell => (
