@@ -27,9 +27,13 @@ const Grid = ({ grid }) => {
                     flexWrap: 'wrap',
                 }}
             >
-                {grid.map(cell => {
-                    return <Cell x={cell.x} y={cell.y} isAlive={cell.isAlive} />
-                })}
+                {console.log(grid[0][2].x)}
+
+                {grid.map(nested =>
+                    nested.map(cell => (
+                        <Cell x={cell.x} y={cell.y} isAlive={cell.isAlive} />
+                    )),
+                )}
             </div>
         )
     }

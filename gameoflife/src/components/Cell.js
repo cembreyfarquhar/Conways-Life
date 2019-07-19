@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Cell = ({ x, y, isAlive }) => {
+    console.log(x)
     if (isAlive) {
         return (
             <div
@@ -8,6 +9,7 @@ const Cell = ({ x, y, isAlive }) => {
                     boxSizing: 'border-box',
                     width: '20px',
                     height: '20px',
+                    backgroundColor: 'black',
                     border: '1px solid grey',
                 }}
             >
@@ -21,7 +23,7 @@ const Cell = ({ x, y, isAlive }) => {
                     boxSizing: 'border-box',
                     width: '20px',
                     height: '20px',
-                    backgroundColor: 'black',
+                    backgroundColor: 'white',
                     border: '1px solid grey',
                     fontSize: '8px',
                 }}

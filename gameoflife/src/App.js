@@ -3,7 +3,7 @@ import './App.css'
 import Game from './components/Game'
 
 function App() {
-    const [playing, setPlaying] = useState(false)
+    const [playing, setPlaying] = useState(null)
     return (
         <div
             style={{

@@ -10,28 +10,63 @@ class Game extends React.Component {
     }
 
     loop() {
-        this.setState({})
+        this.setState(prevState => ({
+            ...prevState,
+            grid: this.makeNewGrid(prevState.grid),
+        }))
         if (this.props.playing === false) {
             clearInterval(this.intervalId)
         }
     }
 
-    makeGrid() {
+    getAliveNeighbors(cell) {
+        //top
+        //top right
+        //right
+        //bottom right
+        //bottom
+        //bottom left
+        //left
+        //top left
+    }
+
+    makeNewGrid(oldGrid) {
         const grid = []
 
         for (let i = 0; i < this.x; i++) {
             const row = []
             for (let j = 0; j < this.y; j++) {
-                row.push(0)
+                const isAlive = this.checkIfShouldLive()
+                row.push({ x: i, y: j, isAlive: true })
             }
             grid.push(row)
         }
-        console.log(grid[2][3])
+
+        return grid
+    }
+
+    checkIfShouldLive(cell) {
+        return true
+    }
+
+    makeFirstGrid() {
+        const grid = []
+
+        for (let i = 0; i < this.x; i++) {
+            const row = []
+            for (let j = 0; j < this.y; j++) {
+                const isAlive = false
+                row.push({ i, j, isAlive })
+            }
+            grid.push(row)
+        }
+
+        return grid
     }
 
     componentDidMount() {
+        this.setState({ grid: this.makeFirstGrid() })
         this.intervalId = setInterval(this.loop.bind(this), 1000)
-        this.makeGrid()
     }
 
     render() {
