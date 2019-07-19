@@ -129,7 +129,7 @@ class Game extends React.Component {
 
     componentDidMount() {
         this.setState({ grid: this.makeFirstGrid() })
-        this.intervalId = setInterval(this.loop.bind(this), 200)
+        this.intervalId = setInterval(this.loop.bind(this), 1000)
     }
 
     render() {
