@@ -19,15 +19,36 @@ class Game extends React.Component {
         }
     }
 
-    getAliveNeighbors(cell) {
+    getAliveNeighbors(grid, cell) {
+        const x = cell.x
+        const y = cell.y
+        let count = 0
         //top
+        if (grid.indexOf([x][y - 1]) !== -1 && grid[x][y - 1].isAlive) count++
         //top right
+        if (grid.indexOf([x + 1][y - 1]) !== -1 && grid[x + 1][y - 1].isAlive)
+            count++
         //right
+        if (grid.indexOf([x + 1][y]) !== -1 && grid[x + 1][y].isAlive) count++
+
         //bottom right
+        if (grid.indexOf([x + 1][y + 1]) !== -1 && grid[x + 1][y + 1].isAlive)
+            count++
+
         //bottom
+        if (grid.indexOf([x - 1][y]) !== -1 && grid[x - 1][y].isAlive) count++
+
         //bottom left
+        if (grid.indexOf([x - 1][y - 1]) !== -1 && grid[x - 1][y - 1].isAlive)
+            count++
+
         //left
+        if (grid.indexOf([x - 1][y]) !== -1 && grid[x - 1][y].isAlive) count++
+
         //top left
+        if (grid.indexOf([x - 1][y]) !== -1 && grid[x][y].isAlive) count++
+
+        return count
     }
 
     makeNewGrid(oldGrid) {
@@ -50,7 +71,7 @@ class Game extends React.Component {
 
         const cell = grid[x][y]
 
-        const neighbors = this.getAliveNeighbors(cell)
+        const neighbors = this.getAliveNeighbors(grid, cell)
 
         console.log(cell)
         // Alive, < 2 neighbors === DEAD by underpopulation
